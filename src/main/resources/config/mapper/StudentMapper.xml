@@ -8,12 +8,8 @@
     <result column="age" property="age" jdbcType="INTEGER" />  
   </resultMap>
 
-    <insert id="insert">
-    <selectKey keyProperty="id" resultType="java.lang.String"
-               order="BEFORE">
-        select replace(uuid(),'-','') from dual
-    </selectKey>
-        insert into t_student (student_id,name,age) values (#{studentId},#{name},#{age})
+    <insert id="insert" parameterType="com.kl.sharding.entity.Student">
+        insert into t_student (id,student_id,name,age) values (#{id},#{studentId},#{name},#{age})
     </insert>
 
     

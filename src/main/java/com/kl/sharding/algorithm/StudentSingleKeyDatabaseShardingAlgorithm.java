@@ -7,35 +7,44 @@ import com.dangdang.ddframe.rdb.sharding.api.strategy.database.SingleKeyDatabase
 import com.google.common.collect.Range;  
   
 
-public class StudentSingleKeyDatabaseShardingAlgorithm implements SingleKeyDatabaseShardingAlgorithm<Integer>{  
+public class StudentSingleKeyDatabaseShardingAlgorithm implements SingleKeyDatabaseShardingAlgorithm<String>{
   
     /** 
      * sql 中关键字 匹配符为 =的时候，表的路由函数 
      */  
 	@Override
-    public String doEqualSharding(Collection<String> availableTargetNames, ShardingValue<Integer> shardingValue) {  
-        for (String each : availableTargetNames) {  
-            if (each.endsWith(shardingValue.getValue() % 2 + "")) {  
-                return each;  
-            }  
-        }  
-        throw new IllegalArgumentException();  
+    public String doEqualSharding(Collection<String> availableTargetNames, ShardingValue<String> shardingValue) {
+        String key =shardingValue.getValue();
+        int h;
+        int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        int index = (availableTargetNames.size() - 1) & hash;
+        for (String each : availableTargetNames) {
+            if (each.endsWith(index + "")) {
+                return each;
+            }
+        }
+        throw new IllegalArgumentException();
     }  
   
     /** 
      * sql 中关键字 匹配符为 in 的时候，表的路由函数 
      */
 	@Override
-    public Collection<String> doInSharding(Collection<String> availableTargetNames, ShardingValue<Integer> shardingValue) {  
-        Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());  
-        for (Integer value : shardingValue.getValues()) {  
-            for (String tableName : availableTargetNames) {  
-                if (tableName.endsWith(value % 2 + "")) {  
-                    result.add(tableName);  
-                }  
-            }  
-        }  
-        return result;  
+    public Collection<String> doInSharding(Collection<String> availableTargetNames, ShardingValue<String> shardingValue) {
+        Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
+        String key =shardingValue.getValue();
+        int h;
+        int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        int index = (availableTargetNames.size() - 1) & hash;
+        for (String value : shardingValue.getValues()) {
+            for (String tableName : availableTargetNames) {
+                if (tableName.endsWith(index + "")) {
+                    result.add(tableName);
+                }
+            }
+        }
+        return result;
+
     }  
   
     /** 
@@ -43,17 +52,20 @@ public class StudentSingleKeyDatabaseShardingAlgorithm implements SingleKeyDatab
      */  
 	@Override
     public Collection<String> doBetweenSharding(Collection<String> availableTargetNames,  
-            ShardingValue<Integer> shardingValue) {  
-        Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());  
-        Range<Integer> range = (Range<Integer>) shardingValue.getValueRange();  
-        for (Integer i = range.lowerEndpoint(); i <= range.upperEndpoint(); i++) {  
-            for (String each : availableTargetNames) {  
-                if (each.endsWith(i % 2 + "")) {  
-                    result.add(each);  
-                }  
-            }  
-        }  
-        return result;  
+            ShardingValue<String> shardingValue) {
+        Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
+        String key =shardingValue.getValue();
+        int h;
+        int hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        int index = (availableTargetNames.size() - 1) & hash;
+        Range<String> range = (Range<String>) shardingValue.getValueRange();
+        for (String each : availableTargetNames) {
+            if (each.endsWith(index + "")) {
+                result.add(each);
+            }
+        }
+
+        return result;
     }  
   
 }  

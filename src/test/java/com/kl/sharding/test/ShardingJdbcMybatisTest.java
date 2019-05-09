@@ -45,7 +45,8 @@ public class ShardingJdbcMybatisTest {
       
     @Test  
     public void testStudentInsert() {  
-        Student student = new Student();  
+        Student student = new Student();
+        student.setId(UUID.getUUID());
         student.setStudentId(UUID.getUUID());
         student.setAge(21);  
         student.setName("hehe");  

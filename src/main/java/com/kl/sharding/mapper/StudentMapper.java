@@ -12,7 +12,7 @@ public interface StudentMapper {
       
     List<Student> findAll();  
       
-    List<Student> findByStudentIds(List<Integer> studentIds);  
+    List<Student> findByStudentIds(List<String> studentIds);
 
 }  
 
