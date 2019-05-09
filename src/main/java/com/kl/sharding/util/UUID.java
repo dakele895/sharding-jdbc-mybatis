@@ -3,8 +3,6 @@ package com.kl.sharding.util;
 /**
  * UUID
  *
- * @author dkl
- * 2019/5/9
  **/
 public class UUID {
 

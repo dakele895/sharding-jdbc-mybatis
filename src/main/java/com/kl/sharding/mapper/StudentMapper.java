@@ -5,8 +5,6 @@ import com.kl.sharding.entity.Student;
 
 /**
  * 处理学生的数据操作接口
- * @author liuyazhuang
- *
  */
 public interface StudentMapper {  
       

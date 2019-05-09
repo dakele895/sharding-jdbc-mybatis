@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.kl.sharding.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,17 +35,18 @@ public class ShardingJdbcMybatisTest {
 
     @Test  
     public void testUserInsert() {  
-        User u = new User();  
-        u.setUserId(14);
-        u.setAge(25);  
-        u.setName("github");  
+        User u = new User();
+        u.setId(UUID.getUUID());
+        u.setUserId(UUID.getUUID());
+        u.setAge(26);
+        u.setName("githubs");
         Assert.assertEquals(userService.insert(u), true);  
     }  
       
     @Test  
     public void testStudentInsert() {  
         Student student = new Student();  
-        student.setStudentId(21);  
+        student.setStudentId(UUID.getUUID());
         student.setAge(21);  
         student.setName("hehe");  
         Assert.assertEquals(studentService.insert(student), true);  
@@ -62,7 +64,7 @@ public class ShardingJdbcMybatisTest {
       
     @Test  
     public void testSQLIN(){  
-        List<User> users = userService.findByUserIds(Arrays.asList(1));  
+        List<User> users = userService.findByUserIds(Arrays.asList("1486095201"));
         if(null != users && !users.isEmpty()){  
             for(User u :users){  
                 System.out.println(u);  

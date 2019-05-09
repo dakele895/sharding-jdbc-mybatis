@@ -5,12 +5,7 @@ import java.util.LinkedHashSet;
 import com.dangdang.ddframe.rdb.sharding.api.ShardingValue;  
 import com.dangdang.ddframe.rdb.sharding.api.strategy.table.SingleKeyTableShardingAlgorithm;  
 import com.google.common.collect.Range;  
-  
-/** 
- * 因为t_student实际表在每个库中只有2个，所以 %2 
- * @author iuyazhuang
- * 
- */  
+
 public class StudentSingleKeyTableShardingAlgorithm implements SingleKeyTableShardingAlgorithm<Integer>{  
   
     /** 

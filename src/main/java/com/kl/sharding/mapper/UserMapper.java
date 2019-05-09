@@ -6,8 +6,6 @@ import com.kl.sharding.entity.User;
   
 /**
  * 处理用户的数据操作接口
- * @author liuyazhuang
- *
  */
 public interface UserMapper {  
       
@@ -15,7 +13,7 @@ public interface UserMapper {
       
     List<User> findAll();  
       
-    List<User> findByUserIds(List<Integer> userIds);  
+    List<User> findByUserIds(List<String> userIds);
       
   
 }  

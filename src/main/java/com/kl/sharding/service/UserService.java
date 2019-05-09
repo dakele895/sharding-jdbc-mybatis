@@ -5,8 +5,6 @@ import com.kl.sharding.entity.User;
 
 /**
  * 处理用户的Service
- * @author liuyazhuang
- *
  */
 public interface UserService {  
       
@@ -14,7 +12,7 @@ public interface UserService {
       
     public List<User> findAll();  
       
-    public List<User> findByUserIds(List<Integer> ids);  
+    public List<User> findByUserIds(List<String> ids);
       
     public void transactionTestSucess();  
       

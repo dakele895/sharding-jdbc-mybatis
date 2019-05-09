@@ -4,34 +4,36 @@ import java.io.Serializable;
 
 /**
  * 学生类
- * @author liuyazhuang
+ *
  *
  */
 public class Student implements Serializable {
 
 	private static final long serialVersionUID = 8920597824668331209L;
 
-	private Integer id;
+	private String id;
 
-	private Integer studentId;
+	private String studentId;
 
 	private String name;
 
 	private Integer age;
 
-	public Integer getId() {
+
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Integer getStudentId() {
+	public String getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(Integer studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 
